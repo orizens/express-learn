@@ -44,7 +44,7 @@ GapiHandler.prototype = {
     set: function(key, value) {
         if (key){
             // if key is an object - iterate and copy values
-            if (key.toString().inexOf('Object')) {
+            if (key.toString().indexOf('Object')) {
                 Object.keys(key).forEach(function(param, val) {
                     this.params[param] = val;
                 });
