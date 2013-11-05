@@ -2,11 +2,15 @@
 <html>
   <head>
     <title></title>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1>Youtube Results</h1>
-    <ul>
+    <form id="searchForm" method="get" action="/youtube/">
+    	<input name="query" type="search" placeholder="search for videos">
+    </form>
+    <ul class="unstyled">
 		<% for(var i=0; i<items.length; i++) {%>
 		   
 		   <li>
@@ -24,4 +28,12 @@
 		<% } %>
 	</ul>
   </body>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  var form = document.querySelector('#searchForm');
+  form.addEventListener('submit', function(ev){
+  	location.assign(form.getAttribute('action') + form.elements['query'].value);
+  	ev.preventDefault();
+  });
+  </script>
 </html>

@@ -7,5 +7,15 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <form id="searchForm" method="get" action="/youtube/">
+    	<input name="query" type="search" placeholder="search for videos">
+    </form>
   </body>
+  <script type="text/javascript">
+  var form = document.querySelector('#searchForm');
+  form.addEventListener('submit', function(ev){
+  	location.assign(form.getAttribute('action') + form.elements['query'].value);
+  	ev.preventDefault();
+  });
+  </script>
 </html>
