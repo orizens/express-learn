@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Youtube Results</h1>
+    <ul>
+		<% for(var i=0; i<items.length; i++) {%>
+		   
+		   <li>
+		   		<%
+		   			var item = items[i].snippet;
+
+		   		%>
+		   		<h2><%= item.title %></h2>
+		   		<img src="<%= item.thumbnails.high.url %>">
+		   		<aside>from <%= item.channelTitle %></aside>
+		   		<a target="_blank" href="http://youtube.com/watch?v=<%= items[i].id.videoId %>">Play Now</a>
+
+		   	</li>
+		
+		<% } %>
+	</ul>
+  </body>
+</html>
