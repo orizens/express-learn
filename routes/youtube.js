@@ -1,7 +1,21 @@
-var googleapis = require('googleapis');
+var GapiHandler = require('./gapi');
 
 // Browser apps key
 var API_KEY='AIzaSyCgrK5ds9uCSRM-WBUFm8V8jPX66q8-Od0';
+
+var youtubeHandler = GapiHandler.create({
+    discover: function() {
+        return this.googleapis.discover('youtube', 'v3');
+    },
+
+    api: function(){
+        return this.client.youtube.search.list;
+    },
+    key: API_KEY,
+    render: function(err, result, res) {
+        res.render('youtube', result);
+    }
+});
 
 /**
  * Search Youtube API
@@ -10,20 +24,6 @@ var API_KEY='AIzaSyCgrK5ds9uCSRM-WBUFm8V8jPX66q8-Od0';
  */
 exports.search = function (req, res) {
     var query = req.param('query');
-    googleapis
-        .discover('youtube', 'v3')
-        .execute(function(err, client){
-            var params = {
-                part: 'snippet',
-                q: query || 'pearl jam',
-                maxResults: 50
-            };
-            var req1 = client.youtube.search.list(params);
-            req1.withApiKey(API_KEY);
-
-            req1.execute(function (err, result) {
-                console.log('search result', result);
-                res.render('youtube', result);
-            })
-        });
+    youtubeHandler.set('q', query);
+    youtubeHandler.request(res);
 }

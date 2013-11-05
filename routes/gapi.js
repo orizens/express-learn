@@ -26,7 +26,8 @@ GapiHandler.prototype = {
         this.req.withApiKey(this.config.key);
     },
 
-    request: function() {
+    request: function(res) {
+        this.res = res;
         this.req.execute(this.response.bind(this));
     },
 
@@ -42,6 +43,12 @@ GapiHandler.prototype = {
     // setter for params
     set: function(key, value) {
         if (key){
+            // if key is an object - iterate and copy values
+            if (key.toString().inexOf('Object')) {
+                Object.keys(key).forEach(function(param, val) {
+                    this.params[param] = val;
+                });
+            }
             this.params[key] = value;
         }
     },
