@@ -4,7 +4,8 @@ function GapiHandler(config) {
 	this.googleapis = googleapis;
     this.params = {
         part: 'snippet',
-        q: ''
+        q: '',
+        maxResults: 50
     };
     // parse configuration
     if (config) {
