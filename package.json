@@ -10,6 +10,6 @@
     "connect": "latest",
     "googleapis": "latest",
     "ejs": "*",
-    "less": "*"
+    "less-middleware": "*"
   }
 }

@@ -3,5 +3,11 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
-  color: #00B7FF
+  @link-color: #00B7FF;
+  color: @link-color;
+  
+  &:hover {
+  	background-color: @link-color;
+  	color: #fff;
+  }
 }
