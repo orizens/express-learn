@@ -11,11 +11,5 @@
     	<input name="query" type="search" placeholder="search for videos">
     </form>
   </body>
-  <script type="text/javascript">
-  var form = document.querySelector('#searchForm');
-  form.addEventListener('submit', function(ev){
-  	location.assign(form.getAttribute('action') + form.elements['query'].value);
-  	ev.preventDefault();
-  });
-  </script>
+  <script type="text/javascript" src="/js/FormHandler.js"></script>
 </html>

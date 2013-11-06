@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Youtube Results</h1>
-    <form id="searchForm" method="get" action="/youtube/">
+    <form class="form-handler" method="get" action="/youtube/">
     	<input name="query" type="search" placeholder="search for videos">
     </form>
     <ul class="unstyled">
@@ -30,11 +30,5 @@
   </body>
   <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-  var form = document.querySelector('#searchForm');
-  form.addEventListener('submit', function(ev){
-  	location.assign(form.getAttribute('action') + form.elements['query'].value);
-  	ev.preventDefault();
-  });
-  </script>
+  <script type="text/javascript" src="/js/FormHandler.js"></script>
 </html>
