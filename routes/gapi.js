@@ -7,6 +7,7 @@ function GapiHandler(config) {
         q: '',
         maxResults: 50
     };
+
     // parse configuration
     if (config) {
         this.config = config;
@@ -15,12 +16,17 @@ function GapiHandler(config) {
             this.render = config.render;
         }
         if (config.discover) {
-            config.discover.call(this).execute(this.prepare.bind(this));;
+            this.discover(this.config.discover[0], this.config.discover[1]);
         }
     }
 }
 
 GapiHandler.prototype = {
+    discover: function (apiName, apiVersion) {
+        this.googleapis.discover(apiName, apiVersion || '')
+            .execute(this.prepare.bind(this));
+    },
+
     prepare: function(err, client) {
         this.client = client;
         this.req = this.getApi();
@@ -55,7 +61,16 @@ GapiHandler.prototype = {
     },
 
     getApi: function () {
-        return this.config.api.call(this)(this.params);
+        var apiPath = this.config.apis.split('.');
+        var apiFun = this.client;
+        apiPath.forEach(function(val){
+            apiFun = apiFun[val];
+        });
+        return apiFun(this.params);
+    },
+
+    render: function(err, result, res) {
+        res.render(this.config.template, result);
     }
 }
 
